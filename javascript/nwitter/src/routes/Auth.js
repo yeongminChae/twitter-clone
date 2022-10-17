@@ -38,6 +38,7 @@ const Auth = () => {
   };
   return (
     <div>
+      <div className="bg-red-100 text-red-300 ">hi</div>
       <form onSubmit={onSubmit}>
         <input
           name="email"
@@ -46,6 +47,7 @@ const Auth = () => {
           required
           value={email}
           onChange={onChange}
+          className="bg-red-200"
         />
         <input
           name="password"
