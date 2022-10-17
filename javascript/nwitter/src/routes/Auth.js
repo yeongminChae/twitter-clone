@@ -4,14 +4,17 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
-import { async } from "@firebase/util";
 
 const Auth = () => {
   const auth = getAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(true);
+  const [error, setError] = useState("");
   const onChange = (event) => {
     const {
       target: { name, value },
@@ -33,12 +36,24 @@ const Auth = () => {
       }
       console.log(data);
     } catch (error) {
-      console.log(error);
+      setError(error.message);
     }
+  };
+  const toggleAccount = () => setNewAccount((prev) => !prev);
+  const onSocialClick = async (event) => {
+    const {
+      target: { name },
+    } = event;
+    let provider;
+    if (name === "google") {
+      provider = new GoogleAuthProvider();
+    } else if (name === "github") {
+      provider = new GithubAuthProvider();
+    }
+    await signInWithPopup(authService, provider);
   };
   return (
     <div>
-      <div className="bg-red-100 text-red-300 ">hi</div>
       <form onSubmit={onSubmit}>
         <input
           name="email"
@@ -57,11 +72,19 @@ const Auth = () => {
           value={password}
           onChange={onChange}
         />
-        <input type="submit" value={newAccount ? "Creacte New " : "log in"} />
+        <input type="submit" value={newAccount ? "Creacte New " : "Sign in"} />
+        {error}
       </form>
+      <span onClick={toggleAccount}>
+        {newAccount ? "Sign In" : "Create New"}{" "}
+      </span>
       <div>
-        <button>Continue with google</button>
-        <button>Continue with github</button>
+        <button onClick={onSocialClick} name="google">
+          Continue with google
+        </button>
+        <button onClick={onSocialClick} name="github">
+          Continue with github
+        </button>
       </div>
     </div>
   );
