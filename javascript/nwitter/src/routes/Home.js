@@ -1,13 +1,16 @@
-import { dbService } from "fBase";
+import { dbService, storageService } from "fBase";
 import {
-  addDoc,
+  // addDoc,
   collection,
   onSnapshot,
   orderBy,
   query,
 } from "firebase/firestore";
+
 import React, { useEffect, useState } from "react";
 import Nweet from "components/Nweet";
+import { v4 as uuidv4 } from "uuid";
+import { ref, uploadString } from "firebase/storage";
 
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
@@ -37,18 +40,20 @@ const Home = ({ userObj }) => {
     });
   }, []);
   const onSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const docRef = await addDoc(collection(dbService, "nweets"), {
-        text: nweet,
-        createdAt: Date.now(),
-        creatorId: userObj.uid,
-      });
-      console.log("Document written by ID", docRef.id);
-    } catch (error) {
-      console.error("Error adding document", error);
-    }
-    setNweet("");
+    const fileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+    const response = await uploadString(fileRef, attatchment, "data_url");
+    console.log(response);
+    // try {
+    //   const docRef = await addDoc(collection(dbService, "nweets"), {
+    //     text: nweet,
+    //     createdAt: Date.now(),
+    //     creatorId: userObj.uid,
+    //   });
+    //   console.log("Document written by ID", docRef.id);
+    // } catch (error) {
+    //   console.error("Error adding document", error);
+    // }
+    // setNweet("");
   };
   const onChange = ({ target: { value } }) => {
     setNweet(value);
@@ -79,7 +84,7 @@ const Home = ({ userObj }) => {
           maxLength={120}
         />
         <input type="file" accept="image/*" onChange={onFileChange} />
-        <input type="submit" value="Tweet" />
+        <input type="submit" value="Tweet" className="cursor-pointer" />
         {attatchment && (
           <div>
             <img src={attatchment} width="50px" height="50px" alt="pics" />
