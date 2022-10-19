@@ -12,6 +12,7 @@ import Nweet from "components/Nweet";
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
   const [nweets, setNweets] = useState([]);
+  const [attatchment, setAttatchment] = useState();
   //   const getNweets = async () => {
   //     const dbNweets = await getDocs(collection(dbService, "nweets"));
   //     dbNweets.forEach((document) => {
@@ -59,10 +60,14 @@ const Home = ({ userObj }) => {
     const theFile = files[0];
     const reader = new FileReader();
     reader.onloadend = (finishEvent) => {
-      console.log(finishEvent);
+      const {
+        currentTarget: { result },
+      } = finishEvent;
+      setAttatchment(result);
     };
     reader.readAsDataURL(theFile);
   };
+  const onClearAttatchment = () => setAttatchment(null);
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -75,6 +80,12 @@ const Home = ({ userObj }) => {
         />
         <input type="file" accept="image/*" onChange={onFileChange} />
         <input type="submit" value="Tweet" />
+        {attatchment && (
+          <div>
+            <img src={attatchment} width="50px" height="50px" alt="pics" />
+            <button onClick={onClearAttatchment}>Clear</button>
+          </div>
+        )}
       </form>
       <div>
         {nweets.map((nweet) => (
