@@ -3,6 +3,8 @@ import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { dbService, storageService } from "fBase";
 import { addDoc, collection } from "firebase/firestore";
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const NweetFac = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
@@ -48,42 +50,45 @@ const NweetFac = ({ userObj }) => {
   };
   const onClearAttatchment = () => setAttatchment("");
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        text="text"
-        value={nweet}
-        onChange={onChange}
-        placeholder="what is on your mind"
-        required
-        maxLength={120}
-      />
-      <label>
-        <svg
-          className="h-12 w-12"
-          stroke="currentColor"
-          fill="none"
-          viewBox="0 0 48 48"
-          aria-hidden="true"
-        >
-          <path
-            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-            strokeWidth={2}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+    <form onSubmit={onSubmit} className="factoryForm">
+      <div className="factoryInput__container">
         <input
-          type="file"
-          accept="image/*"
-          onChange={onFileChange}
-          className="hidden appearance-none"
+          className="factoryInput__input"
+          text="text"
+          value={nweet}
+          onChange={onChange}
+          placeholder="what is on your mind"
+          required
+          maxLength={120}
         />
+        <input type="submit" value="&rarr;" className="factoryInput__arrow" />
+      </div>
+      <label htmlFor="attach-file" className="factoryInput__label">
+        <span>Add Photos</span>
+        <FontAwesomeIcon icon={faPlus} />
       </label>
-      <input type="submit" value="Tweet" className="cursor-pointer" />
+      <input
+        id="attach-file"
+        type="file"
+        accept="image/*"
+        onChange={onFileChange}
+        style={{
+          opacity: 0,
+        }}
+      />
       {attatchment && (
-        <div>
-          <img src={attatchment} width="50px" height="50px" alt="pics" />
-          <button onClick={onClearAttatchment}>Clear</button>
+        <div className="factoryForm__attachment">
+          <img
+            src={attatchment}
+            style={{
+              background: attatchment,
+            }}
+            alt="pics"
+          />
+          <div className="factoryForm__clear" onClick={onClearAttatchment}>
+            <span>Remove</span>
+            <FontAwesomeIcon icon={faTimes} />
+          </div>
         </div>
       )}
     </form>
