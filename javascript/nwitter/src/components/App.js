@@ -13,9 +13,13 @@ function App() {
       if (user) {
         setUserObj({
           displayName: user.displayName,
+          photoURL: user.photoURL,
           uid: user.uid,
           updateProfile: (args) =>
-            updateProfile(user, { displayName: user.displayName }),
+            updateProfile(user, {
+              displayName: user.displayName,
+              photoURL: user.photoURL,
+            }),
         });
       } else {
         setUserObj(null);
@@ -27,9 +31,13 @@ function App() {
     const user = authService.currentUser;
     setUserObj({
       displayName: user.displayName,
+      photoURL: user.photoURL,
       uid: user.uid,
       updateProfile: (args) =>
-        updateProfile(user, { displayName: user.displayName }),
+        updateProfile(user, {
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+        }),
     });
   };
 
@@ -44,7 +52,11 @@ function App() {
       ) : (
         "Initializing..."
       )}
-      {/* <footer>&copy; {new Date().getFullYear()} Nwitter </footer> */}
+      <div className="flex h-full flex-col items-end justify-end">
+        <span className="mb-10">
+          &copy; {new Date().getFullYear()} Nwitter{" "}
+        </span>
+      </div>
     </>
   );
 }

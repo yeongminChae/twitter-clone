@@ -3,9 +3,13 @@ import { dbService, storageService } from "fBase";
 import { doc, deleteDoc, updateDoc, getFirestore } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrash,
+  faPencilAlt,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 
-const Nweet = ({ nweetObj, isOwner }) => {
+const Nweet = ({ nweetObj, isOwner, userObj }) => {
   const NweetTextRef = doc(dbService, "nweets", `${nweetObj.id}`);
   const [editing, setEditing] = useState(false);
   const [newNweet, setNweNweet] = useState(nweetObj.text);
@@ -59,11 +63,27 @@ const Nweet = ({ nweetObj, isOwner }) => {
           )}
         </>
       ) : (
-        <>
+        <div>
           <h4>{nweetObj.text} </h4>
           {nweetObj.attatchmentUrl && (
             <img src={nweetObj.attatchmentUrl} alt="tweet pics" />
           )}
+          <span>
+            {userObj?.photoURL ? (
+              <img
+                alt="profile"
+                src={userObj?.photoURL}
+                className="h-8 w-8 rounded-full"
+              />
+            ) : (
+              <FontAwesomeIcon
+                icon={faUser}
+                color={"#04AAFF"}
+                size="1x"
+                className="mt-2"
+              />
+            )}
+          </span>
           {isOwner && (
             <>
               <div className="nweet__actions">
@@ -76,7 +96,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
               </div>
             </>
           )}
-        </>
+        </div>
       )}
     </div>
   );
