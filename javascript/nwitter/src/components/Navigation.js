@@ -24,17 +24,7 @@ const Navigation = ({ userObj }) => {
               fontSize: 12,
             }}
           >
-            <span>
-              {/* {userObj.photoURL ? (
-                <img
-                  alt="profile"
-                  src={userObj.photoURL}
-                  className="h-8 w-8 rounded-full"
-                />
-              ) : ( */}
-              <FontAwesomeIcon icon={faUser} color={"#04AAFF"} size="2x" />
-              {/* )} */}
-            </span>
+            <FontAwesomeIcon icon={faUser} color={"#04AAFF"} size="2x" />
             <span style={{ marginTop: 10 }}>
               {userObj?.displayName?.length
                 ? `${userObj.displayName}'s Profile`

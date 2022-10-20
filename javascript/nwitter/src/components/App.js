@@ -5,7 +5,6 @@ import { authService } from "fBase";
 
 function App() {
   const [init, setInit] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
   const [userObj, setUserObj] = useState(null);
   useEffect(() => {
     const auth = getAuth();
@@ -13,13 +12,9 @@ function App() {
       if (user) {
         setUserObj({
           displayName: user.displayName,
-          photoURL: user.photoURL,
           uid: user.uid,
           updateProfile: (args) =>
-            updateProfile(user, {
-              displayName: user.displayName,
-              photoURL: user.photoURL,
-            }),
+            updateProfile(user, { displayName: user.displayName }),
         });
       } else {
         setUserObj(null);
@@ -31,13 +26,9 @@ function App() {
     const user = authService.currentUser;
     setUserObj({
       displayName: user.displayName,
-      photoURL: user.photoURL,
       uid: user.uid,
       updateProfile: (args) =>
-        updateProfile(user, {
-          displayName: user.displayName,
-          photoURL: user.photoURL,
-        }),
+        updateProfile(user, { displayName: user.displayName }),
     });
   };
 
@@ -52,11 +43,7 @@ function App() {
       ) : (
         "Initializing..."
       )}
-      <div className="flex h-full flex-col items-end justify-end">
-        <span className="mb-10">
-          &copy; {new Date().getFullYear()} Nwitter{" "}
-        </span>
-      </div>
+      {/* <footer>&copy; {new Date().getFullYear()} Nwitter </footer> */}
     </>
   );
 }

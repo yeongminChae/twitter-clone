@@ -31,6 +31,7 @@ const NweetFac = ({ userObj }) => {
     setNweet("");
     setAttatchment("");
   };
+  console.log(userObj);
   const onChange = ({ target: { value } }) => {
     setNweet(value);
   };
