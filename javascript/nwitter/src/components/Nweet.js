@@ -39,7 +39,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
       <div className="mt-[0.625rem] ">
         <img
           alt="profile"
-          className="h-9 w-9 rounded-full object-fill"
+          className="h-9 w-9 rounded-full object-fill shadow-xl "
           src={nweetObj.photoURL}
         />
       </div>

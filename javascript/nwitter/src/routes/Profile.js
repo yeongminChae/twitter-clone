@@ -137,14 +137,14 @@ function Profile({ userObj, refreshUser }) {
             {editing ? (
               <div className="mb-10 flex items-center justify-center ">
                 <img
-                  className="h-36 w-36 rounded-full"
+                  className="h-36 w-36 rounded-full shadow-xl"
                   ref={fileImageInput}
                   src={userObj?.photoURL ? userObj.photoURL : userImage}
                   alt={userObj?.email}
                 ></img>
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center">
+              <div className="flex flex-col items-center justify-center ">
                 <div className="mb-10 flex items-center justify-center ">
                   <img
                     src={attatchment}
@@ -168,11 +168,11 @@ function Profile({ userObj, refreshUser }) {
             )}
           </>
         ) : (
-          <div className="mb-10 flex items-center justify-center ">
+          <div className="mb-10 flex items-center justify-center  ">
             <img
               alt="profile"
               src={userObj.photoURL}
-              className="h-36 w-36 rounded-full"
+              className="h-36 w-36 rounded-full shadow-xl"
             />
           </div>
         )}
