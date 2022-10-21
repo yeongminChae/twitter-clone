@@ -63,7 +63,7 @@ function Profile({ userObj, refreshUser }) {
   const onSubmit = async (event) => {
     event.preventDefault();
     let attatchmentUrl = "";
-    if (attatchment !== "") {
+    if (attatchment !== photoDownloadUrl) {
       const fileRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
       const response = await uploadString(fileRef, attatchment, "data_url");
       photoDownloadUrl = await getDownloadURL(response.ref);
