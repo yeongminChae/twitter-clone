@@ -21,6 +21,7 @@ const NweetFac = ({ userObj }) => {
         text: nweet,
         createdAt: Date.now(),
         creatorId: userObj.uid,
+        photoURL: userObj.photoURL,
         attatchmentUrl,
       };
       console.log("Document written by ID", nweetObj.id);
@@ -31,7 +32,6 @@ const NweetFac = ({ userObj }) => {
     setNweet("");
     setAttatchment("");
   };
-  console.log(userObj);
   const onChange = ({ target: { value } }) => {
     setNweet(value);
   };

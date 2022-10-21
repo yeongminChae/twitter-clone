@@ -35,49 +35,64 @@ const Nweet = ({ nweetObj, isOwner }) => {
     setNweNweet(value);
   };
   return (
-    <div className="nweet">
-      {editing ? (
-        <>
-          {isOwner && (
-            <>
-              <form onSubmit={onSubmit} className="nweetEdit container">
-                <input
-                  type="text"
-                  placeholder="Edit your nweet"
-                  value={newNweet}
-                  required
-                  autoFocus
-                  className="formInput"
-                  onChange={onChange}
-                />
-                <input type="submit" value="Update Nweet" className="formBtn" />
-              </form>
-              <span onClick={toggleEditing} className="formBtn cancelBtn">
-                Cancle
-              </span>
-            </>
-          )}
-        </>
-      ) : (
-        <>
-          <h4>{nweetObj.text} </h4>
-          {nweetObj.attatchmentUrl && (
-            <img src={nweetObj.attatchmentUrl} alt="tweet pics" />
-          )}
-          {isOwner && (
-            <>
-              <div className="nweet__actions">
-                <span onClick={onDeleteClick}>
-                  <FontAwesomeIcon icon={faTrash} />
+    <div className="flex items-start justify-center">
+      <div className="mt-[0.625rem] ">
+        <img
+          alt="profile"
+          className="h-9 w-9 rounded-full object-fill"
+          src={nweetObj.photoURL}
+        />
+      </div>
+
+      <div className="nweet">
+        {editing ? (
+          <>
+            {isOwner && (
+              <>
+                <form onSubmit={onSubmit} className="nweetEdit container">
+                  <input
+                    type="text"
+                    placeholder="Edit your nweet"
+                    value={newNweet}
+                    required
+                    autoFocus
+                    className="formInput"
+                    onChange={onChange}
+                  />
+                  <input
+                    type="submit"
+                    value="Update Nweet"
+                    className="formBtn"
+                  />
+                </form>
+                <span onClick={toggleEditing} className="formBtn cancelBtn">
+                  Cancle
                 </span>
-                <span onClick={toggleEditing}>
-                  <FontAwesomeIcon icon={faPencilAlt} />
-                </span>
-              </div>
-            </>
-          )}
-        </>
-      )}
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <h4>{nweetObj.text} </h4>
+            {nweetObj.attatchmentUrl && (
+              <img src={nweetObj.attatchmentUrl} alt="tweet pics" />
+            )}
+            {isOwner && (
+              <>
+                <div className="nweet__actions">
+                  <span onClick={onDeleteClick}>
+                    <FontAwesomeIcon icon={faTrash} />
+                  </span>
+                  <span onClick={toggleEditing}>
+                    <FontAwesomeIcon icon={faPencilAlt} />
+                  </span>
+                </div>
+              </>
+            )}
+          </>
+        )}
+        {/* <img alt="profile" className="h-4 w-4 " src={userObj.photoURL} /> */}
+      </div>
     </div>
   );
 };

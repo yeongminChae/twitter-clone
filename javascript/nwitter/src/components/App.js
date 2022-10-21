@@ -12,9 +12,15 @@ function App() {
       if (user) {
         setUserObj({
           displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
           uid: user.uid,
           updateProfile: (args) =>
-            updateProfile(user, { displayName: user.displayName }),
+            updateProfile(
+              user,
+              { displayName: user.displayName },
+              { photoURL: user.photoURL }
+            ),
         });
       } else {
         setUserObj(null);
@@ -26,9 +32,15 @@ function App() {
     const user = authService.currentUser;
     setUserObj({
       displayName: user.displayName,
+      email: user.email,
+      photoURL: user.photoURL,
       uid: user.uid,
       updateProfile: (args) =>
-        updateProfile(user, { displayName: user.displayName }),
+        updateProfile(
+          user,
+          { displayName: user.displayName },
+          { photoURL: user.photoURL }
+        ),
     });
   };
 
