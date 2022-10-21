@@ -32,7 +32,7 @@ const Auth = () => {
         icon={faTwitter}
         color={"#04AAFF"}
         size="3x"
-        style={{ marginBottom: 30 }}
+        className="mb-8  "
       />
       <AuthForm />
       <div className="authBtns">

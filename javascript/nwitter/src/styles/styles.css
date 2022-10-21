@@ -236,6 +236,7 @@ form {
   width: 150px;
   background: white;
   cursor: pointer;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
 /* AuthForm */
@@ -249,6 +250,10 @@ form {
   margin-bottom: 10px;
   font-size: 12px;
   color: black;
+  border-width: 1px;
+  border-color: rgb(125 211 251);
+  border-style: solid;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .authSubmit {
@@ -257,6 +262,10 @@ form {
   color: black;
   margin-top: 10;
   cursor: pointer;
+  border-width: 1px;
+  border-color: rgb(56 189 248);
+  border-style: solid;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .authError {
